@@ -1,14 +1,13 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState } from "react";
 import OpenAI from "openai";
-import "./NewUi.css"
+import "../../styles/UI_styles/NewUi.css"
 function NewUi({ sendDataToParent }) {
   const [step, setStep] = useState(1);
   const [logo, setLogo] = useState("");
   const [searchDalleQuery, setSearchDalleQuery] = useState("");
   const [dalleImageDisplay, setDalleImageDisplay] = useState(false);
   const [selectedImageUrl, setSelectedImageUrl] = useState("");
-  const [fontSize, setFontSize] = useState(16);
+  const fontSize = useState(16);
 
   const [formData, setFormData] = useState({
     companyBackground: "",
@@ -16,15 +15,7 @@ function NewUi({ sendDataToParent }) {
     prompt: "",
   });
 
-  const [adData, setAdData] = useState({
-    companyBackground: "",
-    logo: null,
-    headline: "",
-    subheadline: "",
-    callToAction: "",
-  });
 
-  const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedImage, setSelectedImage] = useState(null);
   const [selectedImageFromLocal, setSelectedImageFromLocal] = useState(null);
 
@@ -114,14 +105,6 @@ function NewUi({ sendDataToParent }) {
     const { companyBackground, headline, subheadline, callToAction } = formData;
     const imageUrl = selectedImageFromLocal || selectedImage;
 
-    setAdData({
-      companyBackground,
-      logo,
-      headline,
-      subheadline,
-      callToAction,
-      currentImageSrc: imageUrl,
-    });
 
     setStep(step + 1);
     sendDataToParent({
@@ -242,7 +225,7 @@ return(  <div className="container">
           <button onClick={handleDalleSearch}>Search</button>
           {dalleImageDisplay && (
             <div>
-              <img src={selectedImageUrl} alt="DALL-E Image" />
+              <img src={selectedImageUrl} alt="not found" />
               <br />
               <button onClick={handleNextDalleImage}>Next Image</button>
             </div>
@@ -258,10 +241,10 @@ return(  <div className="container">
         <div>
           <p>Selected Image Preview:</p>
           {dalleImageDisplay ? (
-            <img src={selectedImageUrl} alt="Selected Image Preview" />
+            <img src={selectedImageUrl} alt="preview" />
           ) : (
             selectedImage && (
-              <img src={selectedImage} alt="Selected Image Preview" />
+              <img src={selectedImage} alt="Preview" />
             )
           )}
           <br />

@@ -1,12 +1,11 @@
 import React, {useState} from "react";
-import NewUi from "./NewUi";
-import AdExample9 from "./AdExample9";
-import AdExample3 from "./AdExample3";
-import ColorPicker from "./ColourPicker";
-import "./App.css"
+import NewUi from "./components/UI/NewUi";
+import AdExample9 from "./template/AdExample9";
+import AdExample3 from "./template/AdExample3";
+import ColorPicker from "./components/ColourPicker";
+import "./styles/App.css"
 
 const App = () => {
-  const [selectedTemplate, setSelectedTemplate] = useState(null);
   const [formData, setFormData] = useState();
   const [textBackgroundColor, setTextBackgroundColor] = useState('#f0f0f0');
   const [textColor, setTextColor] = useState('#f0f0f0');
@@ -23,10 +22,6 @@ const App = () => {
     setTextColor(color.hex); // Use color.hex to get the hexadecimal value
     setFormData({ ...formData, textColor: color.hex }); // Update textBackgroundColor in the formData
   };
-  const handleTemplateSelect = (template) => {
-    setSelectedTemplate(template);
-  };
-  console.log(formData)
 
   return (
     <div className="App">

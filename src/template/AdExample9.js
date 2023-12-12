@@ -1,9 +1,8 @@
 import React, { useRef, useEffect, useState } from "react";
 import domtoimage from "dom-to-image";
-import "./AdExample9.css";
+import "../styles/Template_styles/AdExample9.css";
 import { saveAs } from "file-saver";
-import html2canvas from 'html2canvas';
-import './fonts.css';
+import '../styles/fonts.css';
 
 
 const AdExample9 = ({ formData }) => {

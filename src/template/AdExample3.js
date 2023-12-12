@@ -1,8 +1,8 @@
 import React, { useRef, useEffect, useState } from "react";
 import domtoimage from "dom-to-image";
 import { saveAs } from "file-saver";
-import "./AdExample3.css";
-import './fonts.css';
+import "../styles/Template_styles/AdExample3.css";
+import '../styles/fonts.css';
 
 const AdExample3 = ({ formData }) => {
   const { logo, currentImageSrc: image, headline, subheadline, callToAction,textBackgroundColor, textColor } = formData;
