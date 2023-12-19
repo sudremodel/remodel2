@@ -3,6 +3,9 @@ import domtoimage from "dom-to-image";
 import { saveAs } from "file-saver";
 import "../styles/Template_styles/AdExample3.css";
 import '../styles/fonts.css';
+import axios from "axios";
+import html2canvas from 'html2canvas';
+
 
 const AdExample3 = ({ formData }) => {
   const { logo, currentImageSrc: image, headline, subheadline, callToAction,textBackgroundColor, textColor } = formData;
@@ -24,20 +27,54 @@ const AdExample3 = ({ formData }) => {
     });
   }, [formData]);
 
-  const handleDownload = () => {
+  // const handleDownload = async () => {
+  //   if (adContainerRef.current && imagesLoaded) {
+  //     domtoimage.toBlob(adContainerRef.current)
+  //       .then((blob) => {
+  //         saveAs(blob, 'template.png');
+          
+  //       })
+  //       .catch((error) => {
+  //         console.error("Error capturing content:", error);
+  //       });
+  //       await saveTemplateToServer({
+  //         "logo": logo,
+  // "headline": headline,
+  // "subheadline": subheadline,
+  // "image": formData.currentImageSrc,
+  // "templateName": "AdTemplate3"
+  //       });
+  //   }
+  // };
+  const handleDownload = async () => {
     if (adContainerRef.current && imagesLoaded) {
-      domtoimage.toBlob(adContainerRef.current)
-        .then((blob) => {
+      html2canvas(adContainerRef.current).then((canvas) => {
+        canvas.toBlob((blob) => {
           saveAs(blob, 'template.png');
-        })
-        .catch((error) => {
-          console.error("Error capturing content:", error);
         });
+      });
     }
+    await saveTemplateToServer({
+      "logo": logo,
+"headline": headline,
+"subheadline": subheadline,
+"image": formData.currentImageSrc,
+"templateName": "AdTemplate3"
+    });
   };
   const styles = {
     fontFamily: "'CoreSansN65Bold', sans-serif",
   };
+
+const saveTemplateToServer = async (templateData) => {
+  try {
+    const response = await axios.post('http://localhost:5000/api/templates', templateData);
+    console.log('Template saved on the server:', response.data);
+  } catch (error) {
+    console.error('Error saving template on the server:', error);
+  }
+};
+
 
   return (
     <div style={styles}>

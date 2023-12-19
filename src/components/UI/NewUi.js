@@ -30,7 +30,7 @@ function NewUi({ sendDataToParent }) {
 
     reader.onloadend = () => {
       setSelectedImageFromLocal(reader.result);
-      console.log(reader.result)
+      console.log("local image URL: ",reader.result)
     };
 
     if (file) {
@@ -74,14 +74,18 @@ function NewUi({ sendDataToParent }) {
   };
 
   const handleDalleSearch = async () => {
+    const start = Date.now();
     const image = await openai.images.generate({
       model: "dall-e-3",
       prompt: searchDalleQuery,
     });
     const imageUrl = image.data[0]?.url;
+    const end = Date.now();
+    const responseTime = end - start;
+    console.log(`Response time: ${responseTime}ms`);
     setDalleImageDisplay(true);
     setSelectedImageUrl(imageUrl);
-    console.log('DALL-E 3 Image URL:', selectedImageUrl);
+    console.log('DALL-E 3 Image URL:', imageUrl);
   };
 
   const handleNextDalleImage = async () => {
@@ -124,8 +128,8 @@ return(  <div className="container">
         <br />
         <textarea
           name="companyBackground"
-          value={formData.companyBackground}
-          onChange={handleInputChange}
+          // value={formData.companyBackground}
+          // onChange={handleInputChange}
         ></textarea>
         <br/>
         <button onClick={handleNext}>Next</button>

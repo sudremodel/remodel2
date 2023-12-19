@@ -15,12 +15,12 @@ const App = () => {
   };
 
   const handleColorChange = (color) => {
-    setTextBackgroundColor(color.hex); // Use color.hex to get the hexadecimal value
-    setFormData({ ...formData, textBackgroundColor: color.hex }); // Update textBackgroundColor in the formData
+    setTextBackgroundColor(color.hex); 
+    setFormData({ ...formData, textBackgroundColor: color.hex }); 
   };
   const handleTextChange = (color) => {
-    setTextColor(color.hex); // Use color.hex to get the hexadecimal value
-    setFormData({ ...formData, textColor: color.hex }); // Update textBackgroundColor in the formData
+    setTextColor(color.hex);
+    setFormData({ ...formData, textColor: color.hex });
   };
 
   return (
